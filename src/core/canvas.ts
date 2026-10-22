@@ -107,6 +107,16 @@ export function resizeCanvas(width: number, height: number): void {
   ctx.drawImage(snapshot, 0, 0);
 
   setCanvasSize(width, height);
+  updateZoomLayout();
+}
+
+// transform: scale() leaves the wrapper's layout size unscaled, so below 100% the
+// canvas area would still scroll to the full size. Pull the margins in to match.
+function updateZoomLayout(): void {
+  const wrapper = document.getElementById("canvas-wrapper")!;
+  const shrink = Math.min(0, state.zoom - 1);
+  wrapper.style.setProperty("--zoom-shrink-x", `${shrink * wrapper.offsetWidth}px`);
+  wrapper.style.setProperty("--zoom-shrink-y", `${shrink * wrapper.offsetHeight}px`);
 }
 
 export function setZoomLevel(zoom: number): void {
@@ -117,6 +127,7 @@ export function setZoomLevel(zoom: number): void {
   wrapper.style.transform = `scale(${zoom})`;
   wrapper.style.setProperty("--zoom", String(zoom));
   setZoom(zoom);
+  updateZoomLayout();
 }
 
 export function zoomIn(): void {

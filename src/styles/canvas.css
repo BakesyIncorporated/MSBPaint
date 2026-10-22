@@ -7,7 +7,7 @@
 
 .canvas-wrapper {
   display: inline-block;
-  margin: 4px;
+  margin: 4px calc(4px + var(--zoom-shrink-x, 0px)) calc(4px + var(--zoom-shrink-y, 0px)) 4px;
   border: 1px solid #808080;
   box-shadow: inset -1px -1px 0 #fff, inset 1px 1px 0 #404040;
   background: #fff;
