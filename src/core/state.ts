@@ -37,6 +37,12 @@ export function setBrushSize(size: number): void {
   notify();
 }
 
+export function setCanvasSize(width: number, height: number): void {
+  state.canvasWidth = width;
+  state.canvasHeight = height;
+  notify();
+}
+
 function notify(): void {
   for (const fn of listeners) {
     fn();

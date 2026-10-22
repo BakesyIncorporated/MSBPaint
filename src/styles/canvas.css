@@ -11,8 +11,31 @@
   border: 1px solid #808080;
   box-shadow: inset -1px -1px 0 #fff, inset 1px 1px 0 #404040;
   background: #fff;
+  position: relative;
 }
 
 #paint-canvas {
+  display: block;
   cursor: crosshair;
+}
+
+.canvas-resize-handle {
+  position: absolute;
+  right: -7px;
+  bottom: -7px;
+  width: 6px;
+  height: 6px;
+  background: #000080;
+  cursor: nwse-resize;
+  touch-action: none;
+}
+
+.canvas-resize-outline {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px dashed #000;
+  pointer-events: none;
+  box-sizing: border-box;
 }
