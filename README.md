@@ -28,6 +28,8 @@ Then open http://localhost:5173.
 - **Right click** on a colour swatch to set secondary colour
 - **File** menu exports as PNG
 - **Edit** menu clears the canvas
+- **Image** menu resizes the canvas (enter a size like `800 x 600`)
+- Drag the handle at the canvas's bottom-right corner to resize it; new area is filled with the secondary colour
 
 ## Project structure
 

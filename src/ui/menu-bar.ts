@@ -1,4 +1,4 @@
-import { clearCanvas } from "../core/canvas";
+import { clearCanvas, getCanvas, resizeCanvas, MAX_CANVAS_SIZE } from "../core/canvas";
 import { exportAsPNG } from "../core/export";
 
 // TODO: implement actual dropdown menus instead of direct action on click
@@ -25,6 +25,10 @@ function handleMenuAction(menu: string | undefined): void {
       // For now, clicking Edit clears the canvas
       clearCanvas();
       break;
+    case "image":
+      // For now, clicking Image opens a resize prompt (Image > Attributes)
+      promptCanvasSize();
+      break;
     case "view":
       // TODO: zoom controls
       break;
@@ -32,4 +36,21 @@ function handleMenuAction(menu: string | undefined): void {
       alert("MSBPaint v0.1.0\n\nA very serious paint application.");
       break;
   }
+}
+
+function promptCanvasSize(): void {
+  const canvas = getCanvas();
+  const input = prompt(
+    `Canvas size in pixels (width x height, max ${MAX_CANVAS_SIZE}):`,
+    `${canvas.width} x ${canvas.height}`,
+  );
+  if (input === null) return;
+
+  const match = input.match(/^\s*(\d+)\s*[x×,\s]\s*(\d+)\s*$/i);
+  if (!match) {
+    alert(`"${input}" is not a valid size. Use the form 800 x 600.`);
+    return;
+  }
+
+  resizeCanvas(Number(match[1]), Number(match[2]));
 }
