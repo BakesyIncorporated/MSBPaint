@@ -144,15 +144,18 @@ function initResizeHandle(): void {
     if (dims) dims.textContent = `${size.width} x ${size.height}`;
   });
 
-  const finish = () => {
+  const finish = (commit: boolean) => {
     if (!start) return;
     start = null;
     outline.style.display = "none";
-    resizeCanvas(size.width, size.height);
-    // Restore the status bar if the size did not actually change
-    setCanvasSize(canvas.width, canvas.height);
+    if (commit && (size.width !== canvas.width || size.height !== canvas.height)) {
+      resizeCanvas(size.width, size.height);
+    } else {
+      // Cancelled or unchanged: restore the previewed status bar size
+      setCanvasSize(canvas.width, canvas.height);
+    }
   };
 
-  handle.addEventListener("pointerup", finish);
-  handle.addEventListener("pointercancel", finish);
+  handle.addEventListener("pointerup", () => finish(true));
+  handle.addEventListener("pointercancel", () => finish(false));
 }
