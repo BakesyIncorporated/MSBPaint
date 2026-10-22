@@ -1,7 +1,8 @@
 .status-bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  gap: 2px 16px;
   padding: 2px 8px;
   margin-left: auto;
   font-size: 11px;
@@ -15,4 +16,33 @@
   padding: 1px 6px;
   border: 1px inset #c0c0c0;
   min-width: 60px;
+}
+
+.status-zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.status-zoom {
+  text-align: center;
+}
+
+.status-zoom-button {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border: 1px solid;
+  border-color: #fff #808080 #808080 #fff;
+  background: #c0c0c0;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.status-zoom-button:active:not(:disabled) {
+  border-color: #808080 #fff #fff #808080;
+}
+
+.status-zoom-button:disabled {
+  color: #808080;
 }
