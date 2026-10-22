@@ -1,4 +1,15 @@
-import { clearCanvas, getCanvas, resizeCanvas, MAX_CANVAS_SIZE } from "../core/canvas";
+import {
+  clearCanvas,
+  getCanvas,
+  resizeCanvas,
+  MAX_CANVAS_SIZE,
+  resetZoom,
+  setZoomLevel,
+  zoomIn,
+  zoomOut,
+  ZOOM_LEVELS,
+} from "../core/canvas";
+import { state } from "../core/state";
 import { exportAsPNG } from "../core/export";
 
 // TODO: implement actual dropdown menus instead of direct action on click
@@ -30,7 +41,8 @@ function handleMenuAction(menu: string | undefined): void {
       promptCanvasSize();
       break;
     case "view":
-      // TODO: zoom controls
+      // For now, clicking View opens a zoom prompt (View > Zoom)
+      promptZoom();
       break;
     case "help":
       alert("MSBPaint v0.1.0\n\nA very serious paint application.");
@@ -53,4 +65,27 @@ function promptCanvasSize(): void {
   }
 
   resizeCanvas(Number(match[1]), Number(match[2]));
+}
+
+function promptZoom(): void {
+  const levels = ZOOM_LEVELS.map((z) => `${z * 100}%`).join(", ");
+  const input = prompt(
+    `Zoom: type "in", "out", "reset", or a level (${levels}).\nCtrl+scroll over the canvas also zooms.`,
+    `${Math.round(state.zoom * 100)}%`,
+  );
+  if (input === null) return;
+
+  const command = input.trim().toLowerCase();
+  if (command === "in" || command === "+") return zoomIn();
+  if (command === "out" || command === "-") return zoomOut();
+  if (command === "reset" || command === "0") return resetZoom();
+
+  const match = command.match(/^(\d+(?:\.\d+)?)\s*%?$/);
+  const zoom = match ? Number(match[1]) / 100 : NaN;
+  if (!ZOOM_LEVELS.includes(zoom)) {
+    alert(`"${input}" is not a zoom level. Use in, out, reset, or one of ${levels}.`);
+    return;
+  }
+
+  setZoomLevel(zoom);
 }
