@@ -1,32 +1,10 @@
-import { DrawTool, Point, AppState } from "../core/types";
+import { Point, AppState } from "../core/types";
+import { createDragShapeTool } from "./dragShape";
 
-let startPoint: Point | null = null;
-let savedImageData: ImageData | null = null;
-
-export const ellipseTool: DrawTool = {
-  name: "ellipse",
-  label: "Ellipse",
-  icon: "◯",
-
-  onPointerDown(ctx: CanvasRenderingContext2D, point: Point): void {
-    startPoint = point;
-    savedImageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-  },
-
-  onPointerMove(ctx: CanvasRenderingContext2D, point: Point, state: AppState): void {
-    if (!startPoint || !savedImageData) return;
-    ctx.putImageData(savedImageData, 0, 0);
-    drawEllipse(ctx, startPoint, point, state);
-  },
-
-  onPointerUp(ctx: CanvasRenderingContext2D, point: Point, state: AppState): void {
-    if (!startPoint) return;
-    if (savedImageData) ctx.putImageData(savedImageData, 0, 0);
-    drawEllipse(ctx, startPoint, point, state);
-    startPoint = null;
-    savedImageData = null;
-  },
-};
+export const ellipseTool = createDragShapeTool(
+  { name: "ellipse", label: "Ellipse", icon: "◯" },
+  drawEllipse
+);
 
 // TODO: support filled ellipses
 function drawEllipse(
