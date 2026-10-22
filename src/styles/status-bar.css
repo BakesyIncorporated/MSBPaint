@@ -1,0 +1,17 @@
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 2px 8px;
+  margin-left: auto;
+  font-size: 11px;
+  color: #000;
+}
+
+.status-coords,
+.status-dimensions,
+.status-tool {
+  padding: 1px 6px;
+  border: 1px inset #c0c0c0;
+  min-width: 60px;
+}

@@ -1,0 +1,51 @@
+.colour-palette {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 4px 8px;
+  flex-wrap: wrap;
+  max-width: 340px;
+}
+
+.colour-swatch {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #808080;
+  cursor: pointer;
+}
+
+.colour-swatch:hover {
+  border-color: #fff;
+}
+
+.colour-swatch.active-primary {
+  outline: 2px solid #000;
+  outline-offset: 1px;
+}
+
+.active-colours {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.active-colour-secondary {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #808080;
+}
+
+.active-colour-primary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #808080;
+  z-index: 1;
+}

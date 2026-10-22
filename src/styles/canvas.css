@@ -1,0 +1,18 @@
+.canvas-area {
+  flex: 1;
+  overflow: auto;
+  background: #808080;
+  position: relative;
+}
+
+.canvas-wrapper {
+  display: inline-block;
+  margin: 4px;
+  border: 1px solid #808080;
+  box-shadow: inset -1px -1px 0 #fff, inset 1px 1px 0 #404040;
+  background: #fff;
+}
+
+#paint-canvas {
+  cursor: crosshair;
+}
