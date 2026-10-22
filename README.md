@@ -29,7 +29,7 @@ Then open http://localhost:5173.
 - **File** menu exports as PNG
 - **Edit** menu clears the canvas
 - **Image** menu resizes the canvas (enter a size like `800 x 600`)
-- **View** menu zooms (type `in`, `out`, `reset`, or a level like `200%`); **Ctrl+scroll** over the canvas zooms too, and the status bar shows the zoom level
+- **View** menu zooms (type `in`, `out`, `reset`, or a level like `200%`); **Ctrl+scroll** over the canvas zooms too; the status bar shows the zoom level with **-**, **+** and **100%** buttons to zoom out, zoom in and reset
 - Drag the handle at the canvas's bottom-right corner to resize it; new area is filled with the secondary colour
 
 ## Project structure
