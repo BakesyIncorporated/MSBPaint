@@ -43,7 +43,6 @@ export const bucketTool: DrawTool = {
     const fillColour = hexToRgb(state.primaryColour);
 
     if (sameRgb(targetColour, fillColour)) return;
-    const fillRgba = [...fillColour, 255];
 
     const stack: [number, number][] = [[point.x, point.y]];
 
@@ -54,7 +53,10 @@ export const bucketTool: DrawTool = {
       const idx = (y * width + x) * 4;
       if (!colourMatch(data, idx, targetColour)) continue;
 
-      data.set(fillRgba, idx);
+      data[idx] = fillColour[0];
+      data[idx + 1] = fillColour[1];
+      data[idx + 2] = fillColour[2];
+      data[idx + 3] = 255;
 
       stack.push([x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]);
     }
