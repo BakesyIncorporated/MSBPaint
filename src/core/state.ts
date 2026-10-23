@@ -38,6 +38,11 @@ export function setBrushSize(size: number): void {
   notify();
 }
 
+// The "W x H" text the status bar shows for a canvas size
+export function formatDimensions(width: number, height: number): string {
+  return `${width} x ${height}`;
+}
+
 export function setCanvasSize(width: number, height: number): void {
   state.canvasWidth = width;
   state.canvasHeight = height;

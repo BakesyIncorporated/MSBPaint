@@ -1,4 +1,4 @@
-import { state, setCanvasSize, setZoom } from "./state";
+import { state, formatDimensions, setCanvasSize, setZoom } from "./state";
 import { Point } from "./types";
 import { getActiveTool } from "../tools/registry";
 
@@ -190,23 +190,26 @@ function initResizeHandle(): void {
     height: clampCanvasSize(canvas.height + (e.clientY - start!.y) / state.zoom),
   });
 
+  const showOutline = (s: typeof size) => {
+    outline.style.width = `${s.width}px`;
+    outline.style.height = `${s.height}px`;
+  };
+
   handle.addEventListener("pointerdown", (e) => {
     e.preventDefault();
     handle.setPointerCapture(e.pointerId);
     start = { x: e.clientX, y: e.clientY };
     size = { width: canvas.width, height: canvas.height };
-    outline.style.width = `${size.width}px`;
-    outline.style.height = `${size.height}px`;
+    showOutline(size);
     outline.style.display = "block";
   });
 
   handle.addEventListener("pointermove", (e) => {
     if (!start) return;
     size = sizeFor(e);
-    outline.style.width = `${size.width}px`;
-    outline.style.height = `${size.height}px`;
+    showOutline(size);
     const dims = document.getElementById("status-dimensions");
-    if (dims) dims.textContent = `${size.width} x ${size.height}`;
+    if (dims) dims.textContent = formatDimensions(size.width, size.height);
   });
 
   const finish = (commit: boolean) => {
