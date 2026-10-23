@@ -74,10 +74,6 @@ export function getCanvas(): HTMLCanvasElement {
   return canvas;
 }
 
-export function getContext(): CanvasRenderingContext2D {
-  return ctx;
-}
-
 export function clearCanvas(): void {
   ctx.fillStyle = state.secondaryColour;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
