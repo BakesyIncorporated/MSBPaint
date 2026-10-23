@@ -1,4 +1,4 @@
-import { state, subscribe } from "../core/state";
+import { state, formatDimensions, subscribe } from "../core/state";
 import { ZOOM_LEVELS, resetZoom, zoomIn, zoomOut } from "../core/canvas";
 
 export function initStatusBar(): void {
@@ -12,7 +12,7 @@ export function initStatusBar(): void {
 
 function update(): void {
   const dims = document.getElementById("status-dimensions");
-  if (dims) dims.textContent = `${state.canvasWidth} x ${state.canvasHeight}`;
+  if (dims) dims.textContent = formatDimensions(state.canvasWidth, state.canvasHeight);
 
   const zoom = document.getElementById("status-zoom");
   if (zoom) zoom.textContent = `${Math.round(state.zoom * 100)}%`;
