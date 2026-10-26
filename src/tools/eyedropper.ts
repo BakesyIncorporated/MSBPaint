@@ -1,9 +1,6 @@
 import { DrawTool, Point } from "../core/types";
 import { setPrimaryColour } from "../core/state";
-
-function rgbToHex(r: number, g: number, b: number): string {
-  return "#" + [r, g, b].map((c) => c.toString(16).padStart(2, "0")).join("");
-}
+import { rgbToHex } from "../core/colour";
 
 export const eyedropperTool: DrawTool = {
   name: "eyedropper",
