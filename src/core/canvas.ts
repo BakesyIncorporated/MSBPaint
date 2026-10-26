@@ -6,7 +6,7 @@ let canvas: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
 let drawing = false;
 
-export const MIN_CANVAS_SIZE = 1;
+const MIN_CANVAS_SIZE = 1;
 export const MAX_CANVAS_SIZE = 5000;
 
 export const ZOOM_LEVELS = [0.25, 0.5, 1, 2, 3, 4, 6, 8];
@@ -83,7 +83,7 @@ export function clearCanvas(): void {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-export function clampCanvasSize(size: number): number {
+function clampCanvasSize(size: number): number {
   return Math.min(MAX_CANVAS_SIZE, Math.max(MIN_CANVAS_SIZE, Math.round(size)));
 }
 
