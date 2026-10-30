@@ -5,6 +5,13 @@ function hexToRgb(hex: string): [number, number, number] {
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
 
+function sameRgb(
+  a: [number, number, number],
+  b: [number, number, number]
+): boolean {
+  return a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
+}
+
 function colourMatch(
   data: Uint8ClampedArray,
   idx: number,
@@ -35,21 +42,15 @@ export const bucketTool: DrawTool = {
     ];
     const fillColour = hexToRgb(state.primaryColour);
 
-    if (
-      targetColour[0] === fillColour[0] &&
-      targetColour[1] === fillColour[1] &&
-      targetColour[2] === fillColour[2]
-    ) {
-      return;
-    }
+    if (sameRgb(targetColour, fillColour)) return;
 
     const stack: [number, number][] = [[point.x, point.y]];
 
     while (stack.length > 0) {
       const [x, y] = stack.pop()!;
-      const idx = (y * width + x) * 4;
-
       if (x < 0 || x >= width || y < 0 || y >= height) continue;
+
+      const idx = (y * width + x) * 4;
       if (!colourMatch(data, idx, targetColour)) continue;
 
       data[idx] = fillColour[0];
