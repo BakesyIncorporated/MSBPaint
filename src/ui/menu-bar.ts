@@ -1,5 +1,6 @@
 import {
   clearCanvas,
+  formatZoom,
   getCanvas,
   resizeCanvas,
   MAX_CANVAS_SIZE,
@@ -68,10 +69,10 @@ function promptCanvasSize(): void {
 }
 
 function promptZoom(): void {
-  const levels = ZOOM_LEVELS.map((z) => `${z * 100}%`).join(", ");
+  const levels = ZOOM_LEVELS.map(formatZoom).join(", ");
   const input = prompt(
     `Zoom: type "in", "out", "reset", or a level (${levels}).\nCtrl+scroll over the canvas also zooms.`,
-    `${Math.round(state.zoom * 100)}%`,
+    formatZoom(state.zoom),
   );
   if (input === null) return;
 

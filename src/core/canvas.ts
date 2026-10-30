@@ -10,6 +10,13 @@ export const MIN_CANVAS_SIZE = 1;
 export const MAX_CANVAS_SIZE = 5000;
 
 export const ZOOM_LEVELS = [0.25, 0.5, 1, 2, 3, 4, 6, 8];
+export const MIN_ZOOM = ZOOM_LEVELS[0];
+export const MAX_ZOOM = ZOOM_LEVELS[ZOOM_LEVELS.length - 1];
+
+// Formats a zoom factor as a percentage, e.g. 2 -> "200%"
+export function formatZoom(zoom: number): string {
+  return `${Math.round(zoom * 100)}%`;
+}
 
 export function initCanvas(): void {
   canvas = document.getElementById("paint-canvas") as HTMLCanvasElement;
@@ -120,7 +127,7 @@ function updateZoomLayout(): void {
 }
 
 export function setZoomLevel(zoom: number): void {
-  zoom = Math.min(ZOOM_LEVELS[ZOOM_LEVELS.length - 1], Math.max(ZOOM_LEVELS[0], zoom));
+  zoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, zoom));
   if (zoom === state.zoom) return;
 
   const wrapper = document.getElementById("canvas-wrapper")!;
