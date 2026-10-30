@@ -31,8 +31,9 @@ function render(container: HTMLElement): void {
 
     const dot = document.createElement("span");
     dot.className = "brush-size-dot";
-    dot.style.width = `${Math.min(size, 12)}px`;
-    dot.style.height = `${Math.min(size, 12)}px`;
+    const dotSize = `${size}px`;
+    dot.style.width = dotSize;
+    dot.style.height = dotSize;
     btn.appendChild(dot);
 
     btn.addEventListener("click", () => setBrushSize(size));
