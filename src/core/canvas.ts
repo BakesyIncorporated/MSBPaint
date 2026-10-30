@@ -38,29 +38,30 @@ function getCanvasPoint(e: PointerEvent): Point {
   };
 }
 
+type PointerMethod = "onPointerDown" | "onPointerMove" | "onPointerUp";
+
+// Forwards a pointer event to the active tool at the matching canvas pixel
+function dispatch(e: PointerEvent, method: PointerMethod): void {
+  getActiveTool()[method](ctx, getCanvasPoint(e), state);
+}
+
 function onPointerDown(e: PointerEvent): void {
   drawing = true;
   canvas.setPointerCapture(e.pointerId);
-  const point = getCanvasPoint(e);
-  const tool = getActiveTool();
-  tool.onPointerDown(ctx, point, state);
+  dispatch(e, "onPointerDown");
 }
 
 function onPointerMove(e: PointerEvent): void {
-  const point = getCanvasPoint(e);
-  updateStatusCoords(point);
+  updateStatusCoords(getCanvasPoint(e));
 
   if (!drawing) return;
-  const tool = getActiveTool();
-  tool.onPointerMove(ctx, point, state);
+  dispatch(e, "onPointerMove");
 }
 
 function onPointerUp(e: PointerEvent): void {
   if (!drawing) return;
   drawing = false;
-  const point = getCanvasPoint(e);
-  const tool = getActiveTool();
-  tool.onPointerUp(ctx, point, state);
+  dispatch(e, "onPointerUp");
 }
 
 function updateStatusCoords(point: Point): void {
