@@ -18,9 +18,7 @@ export function initCanvas(): void {
   canvas.width = state.canvasWidth;
   canvas.height = state.canvasHeight;
 
-  // Fill with white
-  ctx.fillStyle = "#ffffff";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  clearCanvas();
 
   canvas.addEventListener("pointerdown", onPointerDown);
   canvas.addEventListener("pointermove", onPointerMove);

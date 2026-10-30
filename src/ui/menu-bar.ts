@@ -1,6 +1,5 @@
 import {
   clearCanvas,
-  getCanvas,
   resizeCanvas,
   MAX_CANVAS_SIZE,
   resetZoom,
@@ -51,10 +50,9 @@ function handleMenuAction(menu: string | undefined): void {
 }
 
 function promptCanvasSize(): void {
-  const canvas = getCanvas();
   const input = prompt(
     `Canvas size in pixels (width x height, max ${MAX_CANVAS_SIZE}):`,
-    `${canvas.width} x ${canvas.height}`,
+    `${state.canvasWidth} x ${state.canvasHeight}`,
   );
   if (input === null) return;
 
