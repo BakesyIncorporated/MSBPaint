@@ -97,8 +97,7 @@ export function resizeCanvas(width: number, height: number): void {
   // Changing the size clears the canvas and resets the context state
   canvas.width = width;
   canvas.height = height;
-  ctx.fillStyle = state.secondaryColour;
-  ctx.fillRect(0, 0, width, height);
+  clearCanvas();
   ctx.drawImage(snapshot, 0, 0);
 
   setCanvasSize(width, height);
