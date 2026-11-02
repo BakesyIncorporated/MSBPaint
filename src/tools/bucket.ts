@@ -1,13 +1,6 @@
 import { DrawTool, Point, AppState } from "../core/types";
 import { hexToRgb } from "../core/colour";
 
-function sameRgb(
-  a: [number, number, number],
-  b: [number, number, number]
-): boolean {
-  return a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
-}
-
 function colourMatch(
   data: Uint8ClampedArray,
   idx: number,
@@ -38,7 +31,7 @@ export const bucketTool: DrawTool = {
     ];
     const fillColour = hexToRgb(state.primaryColour);
 
-    if (sameRgb(targetColour, fillColour)) return;
+    if (colourMatch(data, startIdx, fillColour)) return;
 
     const stack: [number, number][] = [[point.x, point.y]];
 
