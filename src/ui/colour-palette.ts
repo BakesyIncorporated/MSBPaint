@@ -1,15 +1,15 @@
 import { state, setPrimaryColour, setSecondaryColour, subscribe } from "../core/state";
 
-// Classic MS Paint colour palette (non-basic colours theme: ocean tones)
+// Classic MS Paint colour palette (non-basic colours theme: autumn harvest)
 const COLOURS = [
-  "#000000", "#808080", "#800000", "#d8c7a0",
-  "#008000", "#1f6f8b", "#14325c", "#800080",
-  "#5f8f6b", "#2f4858", "#f08a5d", "#b8503f",
-  "#5b5ea6", "#804000",
+  "#000000", "#808080", "#800000", "#e6c78a",
+  "#008000", "#6b8e3d", "#4a2c2a", "#800080",
+  "#8a9a5b", "#6d3b5e", "#d9822b", "#a63a2b",
+  "#7b6a8d", "#804000",
   "#ffffff", "#c0c0c0", "#ff0000", "#ffff00",
-  "#00ff00", "#6fd0c5", "#0000ff", "#ff00ff",
-  "#f4e3b1", "#8fd3a8", "#b5e2f2", "#9fa8da",
-  "#e8708f", "#ff8040",
+  "#00ff00", "#6a9a94", "#0000ff", "#ff00ff",
+  "#f2d98b", "#b5c76a", "#e9d8c4", "#c9a0a0",
+  "#e0a458", "#ff8040",
 ];
 
 export function initColourPalette(): void {
