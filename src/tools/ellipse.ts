@@ -1,5 +1,5 @@
 import { Point, AppState } from "../core/types";
-import { createDragShapeTool } from "./dragShape";
+import { applyOutlineStyle, createDragShapeTool } from "./dragShape";
 
 export const ellipseTool = createDragShapeTool(
   { name: "ellipse", label: "Ellipse", icon: "◯" },
@@ -18,8 +18,7 @@ function drawEllipse(
   const rx = Math.abs(to.x - from.x) / 2;
   const ry = Math.abs(to.y - from.y) / 2;
 
-  ctx.strokeStyle = state.primaryColour;
-  ctx.lineWidth = state.brushSize;
+  applyOutlineStyle(ctx, state);
   ctx.beginPath();
   ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
   ctx.stroke();

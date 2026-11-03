@@ -39,3 +39,12 @@ export function createDragShapeTool(
     },
   };
 }
+
+// Sets the outline colour and width a shape tool strokes with.
+export function applyOutlineStyle(
+  ctx: CanvasRenderingContext2D,
+  state: AppState
+): void {
+  ctx.strokeStyle = state.primaryColour;
+  ctx.lineWidth = state.brushSize;
+}
