@@ -8,7 +8,7 @@ import {
   zoomOut,
   ZOOM_LEVELS,
 } from "../core/canvas";
-import { state } from "../core/state";
+import { state, formatDimensions } from "../core/state";
 import { exportAsPNG } from "../core/export";
 
 // TODO: implement actual dropdown menus instead of direct action on click
@@ -52,7 +52,7 @@ function handleMenuAction(menu: string | undefined): void {
 function promptCanvasSize(): void {
   const input = prompt(
     `Canvas size in pixels (width x height, max ${MAX_CANVAS_SIZE}):`,
-    `${state.canvasWidth} x ${state.canvasHeight}`,
+    formatDimensions(state.canvasWidth, state.canvasHeight),
   );
   if (input === null) return;
 
