@@ -1,6 +1,7 @@
-import { state, formatDimensions, setCanvasSize, setZoom } from "./state";
+import { state, setCanvasSize, setZoom } from "./state";
 import { Point } from "./types";
 import { getActiveTool } from "../tools/registry";
+import { setStatusCoords, setStatusDimensions } from "../ui/status-text";
 
 let canvas: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
@@ -52,7 +53,7 @@ function onPointerDown(e: PointerEvent): void {
 }
 
 function onPointerMove(e: PointerEvent): void {
-  updateStatusCoords(getCanvasPoint(e));
+  setStatusCoords(getCanvasPoint(e));
 
   if (!drawing) return;
   dispatch(e, "onPointerMove");
@@ -62,11 +63,6 @@ function onPointerUp(e: PointerEvent): void {
   if (!drawing) return;
   drawing = false;
   dispatch(e, "onPointerUp");
-}
-
-function updateStatusCoords(point: Point): void {
-  const el = document.getElementById("status-coords");
-  if (el) el.textContent = `${point.x}, ${point.y}px`;
 }
 
 export function getCanvas(): HTMLCanvasElement {
@@ -203,8 +199,7 @@ function initResizeHandle(): void {
     if (!start) return;
     size = sizeFor(e);
     showOutline(size);
-    const dims = document.getElementById("status-dimensions");
-    if (dims) dims.textContent = formatDimensions(size.width, size.height);
+    setStatusDimensions(size.width, size.height);
   });
 
   const finish = (commit: boolean) => {
