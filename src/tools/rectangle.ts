@@ -1,5 +1,5 @@
 import { Point, AppState } from "../core/types";
-import { createDragShapeTool } from "./dragShape";
+import { applyOutlineStyle, createDragShapeTool } from "./dragShape";
 
 export const rectangleTool = createDragShapeTool(
   { name: "rectangle", label: "Rectangle", icon: "▭" },
@@ -13,8 +13,7 @@ function drawRect(
   to: Point,
   state: AppState
 ): void {
-  ctx.strokeStyle = state.primaryColour;
-  ctx.lineWidth = state.brushSize;
+  applyOutlineStyle(ctx, state);
   ctx.strokeRect(
     from.x,
     from.y,
