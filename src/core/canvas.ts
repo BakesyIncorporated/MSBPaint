@@ -4,6 +4,7 @@ import { getActiveTool } from "../tools/registry";
 import { setStatusCoords, setStatusDimensions } from "../ui/status-text";
 
 let canvas: HTMLCanvasElement;
+let wrapper: HTMLElement;
 let ctx: CanvasRenderingContext2D;
 let drawing = false;
 
@@ -15,6 +16,7 @@ export const ZOOM_LEVELS = [0.25, 0.5, 1, 2, 3, 4, 6, 8];
 export function initCanvas(): void {
   canvas = document.getElementById("paint-canvas") as HTMLCanvasElement;
   ctx = canvas.getContext("2d")!;
+  wrapper = document.getElementById("canvas-wrapper")!;
 
   canvas.width = state.canvasWidth;
   canvas.height = state.canvasHeight;
@@ -103,7 +105,6 @@ export function resizeCanvas(width: number, height: number): void {
 // transform: scale() leaves the wrapper's layout size unscaled, so below 100% the
 // canvas area would still scroll to the full size. Pull the margins in to match.
 function updateZoomLayout(): void {
-  const wrapper = document.getElementById("canvas-wrapper")!;
   const shrink = Math.min(0, state.zoom - 1);
   wrapper.style.setProperty("--zoom-shrink-x", `${shrink * wrapper.offsetWidth}px`);
   wrapper.style.setProperty("--zoom-shrink-y", `${shrink * wrapper.offsetHeight}px`);
@@ -113,7 +114,6 @@ export function setZoomLevel(zoom: number): void {
   zoom = Math.min(ZOOM_LEVELS[ZOOM_LEVELS.length - 1], Math.max(ZOOM_LEVELS[0], zoom));
   if (zoom === state.zoom) return;
 
-  const wrapper = document.getElementById("canvas-wrapper")!;
   wrapper.style.transform = `scale(${zoom})`;
   wrapper.style.setProperty("--zoom", String(zoom));
   setZoom(zoom);
@@ -160,8 +160,6 @@ function initWheelZoom(): void {
 }
 
 function initResizeHandle(): void {
-  const wrapper = document.getElementById("canvas-wrapper")!;
-
   const outline = document.createElement("div");
   outline.className = "canvas-resize-outline";
   wrapper.appendChild(outline);
