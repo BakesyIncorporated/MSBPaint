@@ -13,6 +13,21 @@ function colourMatch(
   );
 }
 
+function readRgb(data: Uint8ClampedArray, idx: number): [number, number, number] {
+  return [data[idx], data[idx + 1], data[idx + 2]];
+}
+
+function writeRgb(
+  data: Uint8ClampedArray,
+  idx: number,
+  rgb: [number, number, number]
+): void {
+  data[idx] = rgb[0];
+  data[idx + 1] = rgb[1];
+  data[idx + 2] = rgb[2];
+  data[idx + 3] = 255;
+}
+
 export const bucketTool: DrawTool = {
   name: "bucket",
   label: "Fill",
@@ -24,11 +39,7 @@ export const bucketTool: DrawTool = {
     const data = imageData.data;
 
     const startIdx = (point.y * width + point.x) * 4;
-    const targetColour: [number, number, number] = [
-      data[startIdx],
-      data[startIdx + 1],
-      data[startIdx + 2],
-    ];
+    const targetColour = readRgb(data, startIdx);
     const fillColour = hexToRgb(state.primaryColour);
 
     if (colourMatch(data, startIdx, fillColour)) return;
@@ -42,10 +53,7 @@ export const bucketTool: DrawTool = {
       const idx = (y * width + x) * 4;
       if (!colourMatch(data, idx, targetColour)) continue;
 
-      data[idx] = fillColour[0];
-      data[idx + 1] = fillColour[1];
-      data[idx + 2] = fillColour[2];
-      data[idx + 3] = 255;
+      writeRgb(data, idx, fillColour);
 
       stack.push([x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]);
     }
