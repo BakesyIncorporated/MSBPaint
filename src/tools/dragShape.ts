@@ -31,8 +31,8 @@ export function createDragShapeTool(
     },
 
     onPointerUp(ctx: CanvasRenderingContext2D, point: Point, state: AppState): void {
-      if (!startPoint) return;
-      if (savedImageData) ctx.putImageData(savedImageData, 0, 0);
+      if (!startPoint || !savedImageData) return;
+      ctx.putImageData(savedImageData, 0, 0);
       draw(ctx, startPoint, point, state);
       startPoint = null;
       savedImageData = null;
