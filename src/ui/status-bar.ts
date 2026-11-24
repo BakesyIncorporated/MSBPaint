@@ -1,6 +1,6 @@
 import { state, subscribe } from "../core/state";
 import { ZOOM_LEVELS, resetZoom, zoomIn, zoomOut } from "../core/canvas";
-import { setStatusDimensions } from "./status-text";
+import { setStatusDimensions, setText } from "./status-text";
 
 export function initStatusBar(): void {
   document.getElementById("status-zoom-out")?.addEventListener("click", zoomOut);
@@ -14,16 +14,14 @@ export function initStatusBar(): void {
 function update(): void {
   setStatusDimensions(state.canvasWidth, state.canvasHeight);
 
-  const zoom = document.getElementById("status-zoom");
-  if (zoom) zoom.textContent = `${Math.round(state.zoom * 100)}%`;
+  setText("status-zoom", `${Math.round(state.zoom * 100)}%`);
 
   // Disable the zoom buttons that would do nothing at the current level
   setDisabled("status-zoom-out", state.zoom <= ZOOM_LEVELS[0]);
   setDisabled("status-zoom-in", state.zoom >= ZOOM_LEVELS[ZOOM_LEVELS.length - 1]);
   setDisabled("status-zoom-reset", state.zoom === 1);
 
-  const tool = document.getElementById("status-tool");
-  if (tool) tool.textContent = state.activeTool;
+  setText("status-tool", state.activeTool);
 }
 
 function setDisabled(id: string, disabled: boolean): void {
