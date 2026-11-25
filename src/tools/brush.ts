@@ -1,4 +1,4 @@
-import { createFreehandTool } from "./freehand";
+import { brushStrokeStyle, createFreehandTool } from "./freehand";
 
 export const brushTool = createFreehandTool({
   name: "brush",
@@ -13,10 +13,5 @@ export const brushTool = createFreehandTool({
     ctx.fill();
   },
 
-  strokeStyle: (state) => ({
-    colour: state.primaryColour,
-    width: state.brushSize,
-    cap: "round",
-    join: "round",
-  }),
+  strokeStyle: (state) => brushStrokeStyle(state, "round"),
 });
