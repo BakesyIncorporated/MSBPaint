@@ -80,12 +80,16 @@ function clampCanvasSize(size: number): number {
   return Math.min(MAX_CANVAS_SIZE, Math.max(MIN_CANVAS_SIZE, Math.round(size)));
 }
 
+function isCurrentSize(width: number, height: number): boolean {
+  return width === canvas.width && height === canvas.height;
+}
+
 // Resizes the canvas, keeping the existing drawing anchored at the top-left.
 // Any newly exposed area is filled with the secondary colour.
 export function resizeCanvas(width: number, height: number): void {
   width = clampCanvasSize(width);
   height = clampCanvasSize(height);
-  if (width === canvas.width && height === canvas.height) return;
+  if (isCurrentSize(width, height)) return;
 
   const snapshot = document.createElement("canvas");
   snapshot.width = canvas.width;
@@ -203,7 +207,7 @@ function initResizeHandle(): void {
     if (!start) return;
     start = null;
     outline.style.display = "none";
-    if (commit && (size.width !== canvas.width || size.height !== canvas.height)) {
+    if (commit && !isCurrentSize(size.width, size.height)) {
       resizeCanvas(size.width, size.height);
     } else {
       // Cancelled or unchanged: restore the previewed status bar size
