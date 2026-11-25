@@ -7,6 +7,11 @@ export interface StrokeStyle {
   join?: CanvasLineJoin;
 }
 
+// Round-capped stroke in the primary colour at the current brush size.
+export function brushStrokeStyle(state: AppState, join?: CanvasLineJoin): StrokeStyle {
+  return { colour: state.primaryColour, width: state.brushSize, cap: "round", join };
+}
+
 export function strokeSegment(
   ctx: CanvasRenderingContext2D,
   from: Point,
