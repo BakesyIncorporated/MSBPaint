@@ -1,15 +1,15 @@
 import { state, setPrimaryColour, setSecondaryColour, subscribe } from "../core/state";
 
-// Classic MS Paint colour palette (non-basic colours theme: jewel tones)
+// Classic MS Paint colour palette (non-basic colours theme: desert dusk)
 const COLOURS = [
-  "#000000", "#808080", "#800000", "#e6c8d8",
-  "#008000", "#0f6e5f", "#2a2d7c", "#800080",
-  "#50c878", "#1b1f3b", "#e0a526", "#9b1b4a",
-  "#7b3fa0", "#804000",
+  "#000000", "#808080", "#800000", "#ecd3b0",
+  "#008000", "#6b8f71", "#4a3f6b", "#800080",
+  "#a3b18a", "#2e2a47", "#d98e32", "#a63d40",
+  "#7d5a8c", "#804000",
   "#ffffff", "#c0c0c0", "#ff0000", "#ffff00",
-  "#00ff00", "#f0c75e", "#0000ff", "#ff00ff",
-  "#bfe9e0", "#c4b5ec", "#f2a6c0", "#3a8fb7",
-  "#e8708f", "#ff8040",
+  "#00ff00", "#f4d58d", "#0000ff", "#ff00ff",
+  "#cfe0d4", "#b8a9d1", "#f4b8a0", "#4f8fa3",
+  "#d96f5d", "#ff8040",
 ];
 
 export function initColourPalette(): void {
