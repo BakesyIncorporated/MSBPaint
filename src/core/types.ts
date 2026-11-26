@@ -13,6 +13,11 @@ export interface Point {
   y: number;
 }
 
+export interface CanvasSize {
+  width: number;
+  height: number;
+}
+
 export interface AppState {
   activeTool: ToolType;
   primaryColour: string;
