@@ -1,6 +1,11 @@
 import { DrawTool, Point, AppState } from "../core/types";
 import { hexToRgb } from "../core/colour";
 
+// Offset of pixel (x, y) in RGBA image data: 4 bytes (R, G, B, A) per pixel.
+function pixelIndex(x: number, y: number, width: number): number {
+  return (y * width + x) * 4;
+}
+
 function colourMatch(
   data: Uint8ClampedArray,
   idx: number,
@@ -38,7 +43,7 @@ export const bucketTool: DrawTool = {
     const imageData = ctx.getImageData(0, 0, width, height);
     const data = imageData.data;
 
-    const startIdx = (point.y * width + point.x) * 4;
+    const startIdx = pixelIndex(point.x, point.y, width);
     const targetColour = readRgb(data, startIdx);
     const fillColour = hexToRgb(state.primaryColour);
 
@@ -50,7 +55,7 @@ export const bucketTool: DrawTool = {
       const [x, y] = stack.pop()!;
       if (x < 0 || x >= width || y < 0 || y >= height) continue;
 
-      const idx = (y * width + x) * 4;
+      const idx = pixelIndex(x, y, width);
       if (!colourMatch(data, idx, targetColour)) continue;
 
       writeRgb(data, idx, fillColour);
