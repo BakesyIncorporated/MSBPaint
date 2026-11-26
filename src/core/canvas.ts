@@ -1,5 +1,5 @@
 import { state, setCanvasSize, setZoom } from "./state";
-import { Point } from "./types";
+import { CanvasSize, Point } from "./types";
 import { getActiveTool } from "../tools/registry";
 import { setStatusCoords, setStatusDimensions } from "../ui/status-text";
 
@@ -170,15 +170,15 @@ function initResizeHandle(): void {
   wrapper.appendChild(handle);
 
   let start: Point | null = null;
-  let size = { width: 0, height: 0 };
+  let size: CanvasSize = { width: 0, height: 0 };
 
   // Pointer movement is in screen pixels; divide by the zoom to get canvas pixels
-  const sizeFor = (e: PointerEvent) => ({
+  const sizeFor = (e: PointerEvent): CanvasSize => ({
     width: clampCanvasSize(canvas.width + (e.clientX - start!.x) / state.zoom),
     height: clampCanvasSize(canvas.height + (e.clientY - start!.y) / state.zoom),
   });
 
-  const showOutline = (s: typeof size) => {
+  const showOutline = (s: CanvasSize) => {
     outline.style.width = `${s.width}px`;
     outline.style.height = `${s.height}px`;
   };
