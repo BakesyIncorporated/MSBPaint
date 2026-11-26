@@ -1,5 +1,5 @@
 import { DrawTool, Point, AppState } from "../core/types";
-import { hexToRgb } from "../core/colour";
+import { hexToRgb, readRgb, writeRgb } from "../core/colour";
 
 function colourMatch(
   data: Uint8ClampedArray,
@@ -11,21 +11,6 @@ function colourMatch(
     data[idx + 1] === target[1] &&
     data[idx + 2] === target[2]
   );
-}
-
-function readRgb(data: Uint8ClampedArray, idx: number): [number, number, number] {
-  return [data[idx], data[idx + 1], data[idx + 2]];
-}
-
-function writeRgb(
-  data: Uint8ClampedArray,
-  idx: number,
-  rgb: [number, number, number]
-): void {
-  data[idx] = rgb[0];
-  data[idx + 1] = rgb[1];
-  data[idx + 2] = rgb[2];
-  data[idx + 3] = 255;
 }
 
 export const bucketTool: DrawTool = {
