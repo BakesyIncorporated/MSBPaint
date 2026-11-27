@@ -8,8 +8,9 @@ import {
   zoomOut,
   ZOOM_LEVELS,
 } from "../core/canvas";
-import { state, formatDimensions } from "../core/state";
+import { state } from "../core/state";
 import { exportAsPNG } from "../core/export";
+import { formatDimensions } from "./status-text";
 
 // TODO: implement actual dropdown menus instead of direct action on click
 // TODO: implement Edit > Undo / Redo (needs an undo history stack)
