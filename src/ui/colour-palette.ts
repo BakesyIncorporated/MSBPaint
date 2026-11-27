@@ -1,9 +1,11 @@
 import { state, setPrimaryColour, setSecondaryColour, subscribe } from "../core/state";
 
-// MS Paint-style palette: two rows of 14 swatches, dark row first, then light row.
-// Classic MS Paint basics keep their slots: black, grey, maroon, green, purple and
-// brown in the dark row; white, silver, red, yellow, lime, blue, magenta and orange
-// in the light row. Every other slot is a jewel-tone accent.
+// MS Paint-style palette in two groups of 14: dark entries first, then light entries.
+// The groups are logical only; the palette renders as one wrapping row, so where it
+// breaks depends on the available width. Classic MS Paint basics keep their slots:
+// black, grey, maroon, green, purple and brown in the dark group; white, silver, red,
+// yellow, lime, blue, magenta and orange in the light group. Every other slot is a
+// jewel-tone accent.
 const COLOURS = [
   "#000000", "#808080", "#800000", "#e6c8d8",
   "#008000", "#0f6e5f", "#2a2d7c", "#800080",
