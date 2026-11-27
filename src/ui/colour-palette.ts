@@ -1,6 +1,9 @@
 import { state, setPrimaryColour, setSecondaryColour, subscribe } from "../core/state";
 
-// Classic MS Paint colour palette (non-basic colours theme: jewel tones)
+// MS Paint-style palette: two rows of 14 swatches, dark row first, then light row.
+// Classic MS Paint basics keep their slots: black, grey, maroon, green, purple and
+// brown in the dark row; white, silver, red, yellow, lime, blue, magenta and orange
+// in the light row. Every other slot is a jewel-tone accent.
 const COLOURS = [
   "#000000", "#808080", "#800000", "#e6c8d8",
   "#008000", "#0f6e5f", "#2a2d7c", "#800080",
